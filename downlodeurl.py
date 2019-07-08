@@ -67,7 +67,7 @@ def geturl():
 	#把补丁的URL写入文档
 	writeurls(url)
 	time.sleep(2)
-	gengxin()
+	reflash_page()
 
 #把补丁的URL写入文档
 def writeurls(url):
@@ -75,7 +75,7 @@ def writeurls(url):
 		f.write(url + '\n')
 
 #更新页面
-def gengxin():
+def reflash_page():
 	path5 = "/html/body/section/nav/div[3]/ul[3]/li[8]/i"
 	driver.switch_to.default_content()
 	time.sleep(2)
@@ -85,7 +85,7 @@ def gengxin():
 	time.sleep(2)
 
 #该方法主要用于下架补丁
-def xiajia():
+def patch_down():
 	path3 = "/html/body/div[2]/div/div/div/div/div[3]/table/tbody/tr[1]/td[9]/span[5]/a"
 	path6 = "//*[@id='field-status']/label[1]/input"
 	path7 = "/html/body/div[2]/div/div/form/div[2]/button[2]"	
@@ -100,10 +100,10 @@ def xiajia():
 	driver.find_element_by_xpath(path6).click()
 	driver.find_element_by_xpath(path7).click()
 	time.sleep(2)
-	gengxin()
+	reflash_page()
 
-#判断补丁的状态，如已经为无效，则跳过。如为有效，则调用xiajia方法，将其设置为无效
-def panduan():
+#判断补丁的状态，如已经为无效，则跳过。如为有效，则调用patch_down方法，将其设置为无效
+def patch_status():
 	
 	path8 = "/html/body/div[2]/div/div/div/div/div[3]/table/tbody/tr[1]/td[4]/div"
 	path1 = "/html/body/div[2]/div/div/div/div/form/div/div/div[1]/div/div/input"
@@ -118,7 +118,7 @@ def panduan():
 	else:
 		print "补丁为有效，正在处理!"
 		time.sleep(2)
-		xiajia()
+		patch_down()
 		print "补丁成功设置为无效！"
 
 #获取补丁的策略信息
@@ -134,7 +134,7 @@ def getrules():
 	# print type(rules_num)
 	writedata(rules_num)
 
-	gengxin()
+	reflash_page()
 
 #把每一个补丁的策略数据写入一个文件
 def writedata(data):
@@ -152,8 +152,8 @@ if __name__ == "__main__":
 	for i in xrange(7300,7341):
 		print "正在处理的补丁ID为：" + str(i) + '\n'
 		checkpatch(i)
-		#判断补丁的状态，如已经为无效，则跳过。如为有效，则调用xiajia方法，将其设置为无效
-		# panduan()
+		#判断补丁的状态，如已经为无效，则跳过。如为有效，则调用patch_down方法，将其设置为无效
+		
 
 		#geturl方法，去获取补丁的URL
 		# geturl()
