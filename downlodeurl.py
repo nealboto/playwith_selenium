@@ -27,7 +27,7 @@ def loginweb():
 	#点击outlook
 	driver.find_element_by_css_selector("p[class = 'login_outlook']").click()
 	#输入密码
-	driver.find_element_by_id("txtPassword").send_keys("Bawfde@11")
+	driver.find_element_by_id("txtPassword").send_keys("*****")
 	#点击确定
 	driver.find_element_by_name("ibnLogin").click()
 	print "登录成功\n"
